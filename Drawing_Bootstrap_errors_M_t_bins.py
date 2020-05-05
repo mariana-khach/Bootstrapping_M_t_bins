@@ -115,7 +115,7 @@ def main(argv):
         for tb in range(0,NumtBins):
             h1_list_Waves[i_Mbin].append([])
         i_Mbin=i_Mbin+1
-    print(h1_list_Waves)
+    #print(h1_list_Waves)
     x_min=np.zeros(NumBins)
     x_max=np.zeros(NumBins)   
     N_bins = array.array('i',(0 for i in range(0,NumBins)))
@@ -137,7 +137,7 @@ def main(argv):
             for waves in range(0,N_amps):
                 h1_list_Waves[Bin][Bint].append(TH1F('h1_boot_'+amps.split()[waves]+'_Mbin'+str(Bin+1)+'_tbin'+str(Bint+1),amps.split()[waves],N_bins[Bin],x_min[Bin],x_max[Bin]))
             h1_list_all[Bin].append(TH1F('h1_boot_All_'+'Mbin'+str(Bin+1)+'tbin'+str(Bint+1),'All waves',N_bins[Bin],x_min[Bin],x_max[Bin]))
-    print(h1_list_Waves[Bin][Bint])
+    #print(h1_list_Waves[Bin][Bint])
 
 
     
