@@ -20,11 +20,11 @@ path of the baseDir, which should point to the directory above EtaPi_fit. Also e
 7. Copy /w/halld-scifs17exp/Mariana/halld_sim/src/programs/AmplitudeAnalysis/Bootstrap_plot_etapi_delta_SPD_mass_t_bins/Bootstrap_plot_etapi_delta_SPD_mass_t_bins.cc
 to your version of halld software and compile it to run in the GlueX framework.
 This program will create a text files in each mass and t bin that contains the intensity and error from minut of each partial 
-wave as well as total intensity and its error. Each of this .txt files has lines equal to the number of bootstraping samples and the first two colomns show the value of M and t for corresponding bin.
+wave as well as total intensity and its error. Each of this .txt files has lines equal to the number of bootstraping samples and the first two colomns show the value of M and t for corresponding bin, and the rest of the colomns correspond to the wave intensityies and their uncertainties. The last two colomn correspond to total intensity.
 8. Finally copy the Drawing_Bootstrap_errors_M_t_bins.py to the directory above EtaPi_Fit and run it to plot the results from fiitng the original data in different M and t bins, with the uncertainties from bootstraping. It takes 6 arguments, the waveset used in the fitting, number of M bins, number of t bins, the path of the directory that contains directories corresponding to M_t bins, and the path for the text file with fit results from fitting the original data. In later again first two colomns have the M and t values, and the numbr of lines are N_M_bin*N_t_bin. You can run this code the following way. 
 
 python Drawing_Bootstrap_errors_M_t_bins.py "S0mi P0mi P1mi D0mi D1mi P1pl D1pl" 45 4 100 EtaPi_fit/ etapi_fit.txt
 
 This code will also save the intensity distributions from different bootstrapping samples for a given wave and M_t bin in a .root file.
-
+The order of the waves given as an argument to the code should match that with the one that has been used to write the original and bootstrapping fit results into the text files.
 
