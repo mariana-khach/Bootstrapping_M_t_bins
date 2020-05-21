@@ -115,29 +115,39 @@ def main(argv):
         for tb in range(0,NumtBins):
             h1_list_Waves[i_Mbin].append([])
         i_Mbin=i_Mbin+1
-    #print(h1_list_Waves)
-    x_min=np.zeros(NumBins)
-    x_max=np.zeros(NumBins)   
-    N_bins = array.array('i',(0 for i in range(0,NumBins)))
 
 
 
 
 
-    
-    
+
+
+    main = []
     #Defining histograms for intensities from different bootstraping samples for a given aplitude and M bin
     for Bin in range(0,NumBins):
-        N_bins[Bin]=int(300*orig_all_Waves[Bin])
-        x_min[Bin]=-500
-        x_max[Bin]=int(3*orig_all_Waves[Bin])
 
+        #N_bins=int(300*orig_all_Waves[Bin])
+        N_bins=int(80000)
+        x_min=int(-500)
+        x_max=int(3*orig_all_Waves[Bin])
+
+        outer = []
+
+        
         for Bint in range(0,NumtBins):
-
+            
+            inner = [];
             for waves in range(0,N_amps):
-                h1_list_Waves[Bin][Bint].append(TH1F('h1_boot_'+amps.split()[waves]+'_Mbin'+str(Bin+1)+'_tbin'+str(Bint+1),amps.split()[waves],N_bins[Bin],x_min[Bin],x_max[Bin]))
-            h1_list_all[Bin].append(TH1F('h1_boot_All_'+'Mbin'+str(Bin+1)+'tbin'+str(Bint+1),'All waves',N_bins[Bin],x_min[Bin],x_max[Bin]))
-    #print(h1_list_Waves[Bin][Bint])
+                h1_list_Waves[Bin][Bint].append(TH1F('h1_boot_'+str(amps.split()[waves])+'_Mbin'+str(Bin+1)+'_tbin'+str(Bint+1),str(amps.split()[waves]),N_bins,x_min,x_max))
+                #inner.append(TH1F('h1_boot_'+str(amps.split()[waves])+'_Mbin'+str(Bin+1)+'_tbin'+str(Bint+1),str(amps.split()[waves]),N_bins,x_min,x_max))
+                #hh = TH1F('h1_boot_'+str(amps.split()[waves])+'_Mbin'+str(Bin+1)+'_tbin'+str(Bint+1),str(amps.split()[waves]),N_bins,x_min,x_max)
+                #print( "N_bins = " + str(N_bins) + " x_min =  " + str(x_min) + "   x_max = " + str(x_max)  )
+                #inner.append(hh)
+
+            h1_list_all[Bin].append(TH1F('h1_boot_All_'+'Mbin'+str(Bin+1)+'_tbin'+str(Bint+1),'All waves',N_bins,x_min,x_max))
+            
+            #outer.append(inner);
+        #main.append(outer)
 
 
     
@@ -182,7 +192,7 @@ def main(argv):
     std_Waves=np.sqrt(std_Waves_square)
     std_all_Waves=np.sqrt(std_all_Waves_square)
     
-    
+    print('I am here')
    
    ##The graphs of intensities of different waves 
     error_M=np.zeros(NumBins)   
@@ -201,7 +211,8 @@ def main(argv):
         grerr_list_Wave[waves].SetMarkerStyle( 20 )
         grerr_list_Wave[waves].SetName(amps.split()[waves])
         grerr_list_Wave[waves].SetTitle(amps.split()[waves])        
-        grerr_list_Wave[waves].SetMaximum(1.2*np.amax(orig_Wave[waves]))                                                                                          
+        grerr_list_Wave[waves].SetMaximum(1.2*np.amax(orig_Wave[waves]))
+
         grerr_list_Wave[waves].SetMinimum(0.8*np.amin(orig_Wave[waves]))         
         grerr_list_Wave[waves].Draw( 'AP' )
         c1.Print('Wave'+amps.split()[waves]+'.pdf')
